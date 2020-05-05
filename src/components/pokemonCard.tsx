@@ -1,7 +1,6 @@
-import React, {useState, FC} from 'react';
+import React, {FC} from 'react';
 import {Button, Card, CardActionArea, CardActions, CardContent, CardMedia, Typography} from "@material-ui/core";
-import {PokemonDialog} from "./pokemonDialog";
-import { PokeCardProps } from '../definitions/redux';
+import { PokeCardProps } from '../definitions';
 
 
 const pokeNumber = RegExp(/\/(\d+)\//g);

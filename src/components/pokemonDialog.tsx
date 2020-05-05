@@ -5,7 +5,6 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
   Typography,
   GridList,
   GridListTile,
