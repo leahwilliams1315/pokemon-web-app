@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+.dialog-image {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+}
+/*MuiPaper-root MuiDrawer-paper MuiDrawer-paperAnchorRight MuiDrawer-paperAnchorDockedRight MuiPaper-elevation0*/
+
+.poke-drawer {
+  width: 275px;
+}
+
+.drawer-text {
+  text-transform: capitalize;
+}
+
+.drawer-list-item {
+  border-bottom: solid 1px #a0a9b3;
+  width: 100%;
+  height: 100px;
+}
