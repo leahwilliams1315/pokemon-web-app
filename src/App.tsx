@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { connect } from "react-redux";
 import { PokemonCard } from "./components/pokemonCard";
-import { Grid, Drawer, Button } from "@material-ui/core";
+import { Grid, Drawer, Button, AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
+// import { MenuIcon } from '@material-ui/icons';
 import { AppProps } from './definitions';
 import { PokemonDialog } from "./components/pokemonDialog";
 import { DrawerListItem } from "./components/drawerItem";
@@ -33,9 +34,20 @@ const App: React.FC<AppProps> = (
 
   useEffect(() => {
     dispatchGetPokemon();
-  }, []);
+  }, [dispatchGetPokemon]);
   return (
     <div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            {/*<MenuIcon />*/}
+          </IconButton>
+          <Typography variant="h6">
+            Pokemon Index
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className="main">
       <Grid style={Boolean(multiSelected.length) ? {width: 'calc(100% - 275px)'} : {}} container spacing={4}>
         {pokemonList.map(pokemon => <Grid key={pokemon.url} item xs={3}>
           <PokemonCard
@@ -76,7 +88,7 @@ const App: React.FC<AppProps> = (
         <Button onClick={() => {dispatchClearPokemonDrawer()}}>Clear All</Button>
         <Button onClick={() => dispatchOpenCompareDialog(true)}>Compare Pokemon</Button>
       </Drawer>
-
+      </div>
     </div>
   );
 }

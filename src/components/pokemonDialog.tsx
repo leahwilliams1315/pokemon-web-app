@@ -1,4 +1,4 @@
-import React, {useEffect, useState, FC} from "react";
+import React, {FC} from "react";
 import {
   Button,
   Dialog,
@@ -10,16 +10,8 @@ import {
   GridListTile,
   GridListTileBar
 } from "@material-ui/core";
-import {PokeDialogProps} from '../definitions/redux'
+import {PokeDialogProps} from '../definitions'
 
-// @ts-ignore
-
-const formatSpeciesData = ({evolves_from_species, flavor_text_entries}) => ({
-  evolves_from_species,
-  flavor_text_entries: flavor_text_entries.filter((entry: {language: {name: string} }) =>
-    entry.language.name === 'en')
-
-});
 const formatImageName = (pokemonName: string, spriteLabel: string) => {
   return pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1) + " " + spriteLabel;
 };
@@ -34,11 +26,11 @@ export const PokemonDialog: FC<PokeDialogProps> = ({pokemonData, open = false, p
       onClose={() => {
         dialogClosed();
       }}
-      open={pokemonData}
+      open={Boolean(pokemonData)}
     >
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
-          <div className="dialog-image" style={{backgroundImage: `url(https://pokeres.bastionbot.org/images/pokemon/${pokemonNumber}.png)`}} />
+          <span className="dialog-image" style={{backgroundImage: `url(https://pokeres.bastionbot.org/images/pokemon/${pokemonNumber}.png)`}} />
 
           {pokemonData ?
             pokemonData

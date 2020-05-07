@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogContentText,
 } from "@material-ui/core";
-import { ComparePokemonGraph } from "./lineGraph";
+import { ComparePokemonGraph } from './lineGraph';
 
 export type PokemonStatLineGraphPoint = {
     [pokemonNameOrName: string]: number | string;

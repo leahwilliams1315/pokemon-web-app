@@ -1,8 +1,8 @@
-import { map, mergeMap, filter, tap } from 'rxjs/operators';
-import { ofType, ActionsObservable } from "redux-observable";
+import { map, mergeMap, filter } from 'rxjs/operators';
+import { ofType, ActionsObservable } from 'redux-observable';
 import { of, from } from 'rxjs';
-import { GetPokemonAction, UpdateDrawerPokelist } from '../definitions/redux';
-import { PokemonListItem } from "../definitions";
+import { GetPokemonAction, UpdateDrawerPokelist } from '../definitions';
+import { PokemonListItem } from '../definitions';
 import PokeAPI from "pokeapi-typescript";
 
 type UpdateAction = {

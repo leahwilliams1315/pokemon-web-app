@@ -22,12 +22,11 @@ export const PokemonCard: FC<PokeCardProps> = ({pokemon, onLearnMore, onAddToPok
         title={pokemon.name}
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography gutterBottom variant="h5" component="h2" className="pokemon-name">
           {pokemon.name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-          across all continents except Antarctica {pokemon.url}
+
         </Typography>
       </CardContent>
     </CardActionArea>
