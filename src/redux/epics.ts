@@ -24,11 +24,21 @@ const getFullPokemonData = (pokeUrl: string): Promise<any> => fetch(pokeUrl)
       .then(speciesData => ({...data, species_data: formatSpeciesData(speciesData)}))
   );
 
+// export const getPokemonEpic = (action$: ActionsObservable<GetPokemonAction>) => action$.pipe(
+//   ofType('GET_POKEMON'),
+//   mergeMap(action => PokeAPI.Pokemon.list(50)),
+//   map((data) => {
+//     return ({type: 'UPDATE_POKEMON_LIST', payload: data.results});
+//   }));
+
+
 export const getPokemonEpic = (action$: ActionsObservable<GetPokemonAction>) => action$.pipe(
   ofType('GET_POKEMON'),
-  mergeMap(action => PokeAPI.Pokemon.list(50)),
+  mergeMap(action => PokeAPI.Pokemon.list(360)),
+  mergeMap(data => Promise.all(data.results.map(poke => getFullPokemonData(poke.url).then(x => ({...x, ...poke}))))),
+
   map((data) => {
-    return ({type: 'UPDATE_POKEMON_LIST', payload: data.results});
+    return ({type: 'UPDATE_POKEMON_LIST', payload: data});
   }));
 
 export const getSelectedPokemon = (action$: ActionsObservable<UpdateAction>) =>

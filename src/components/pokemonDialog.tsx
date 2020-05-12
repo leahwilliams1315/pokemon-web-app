@@ -29,18 +29,17 @@ export const PokemonDialog: FC<PokeDialogProps> = ({pokemonData, open = false, p
       open={Boolean(pokemonData)}
     >
       <DialogContent>
+        <div className="dialog-image" style={{backgroundImage: `url(https://pokeres.bastionbot.org/images/pokemon/${pokemonNumber}.png)`}} />
         <DialogContentText id="alert-dialog-slide-description">
-          <span className="dialog-image" style={{backgroundImage: `url(https://pokeres.bastionbot.org/images/pokemon/${pokemonNumber}.png)`}} />
-
           {pokemonData ?
             pokemonData
               .species_data
               .flavor_text_entries
               .filter((flavourText: any, index: number, list: any) => list.findIndex((ft: any) => ft.flavor_text === flavourText.flavor_text) === index)
-              .map((flavourText: any) => <div>
-                <h5>{flavourText.version.name}</h5>
+              .map((flavourText: any) => <span>
+                <span>{flavourText.version.name}</span>
                 <Typography variant="body1" gutterBottom> {flavourText.flavor_text} </Typography>
-              </div>)
+              </span>)
             : "LOADING..."}
         </DialogContentText>
 

@@ -26,7 +26,7 @@ export const PokemonCard: FC<PokeCardProps> = ({pokemon, onLearnMore, onAddToPok
           {pokemon.name}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-
+          {pokemon.species_data.flavor_text_entries[0].flavor_text}
         </Typography>
       </CardContent>
     </CardActionArea>
