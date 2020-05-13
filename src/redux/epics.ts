@@ -1,13 +1,12 @@
 import { map, mergeMap, filter } from 'rxjs/operators';
 import { ofType, ActionsObservable } from 'redux-observable';
 import { of, from } from 'rxjs';
-import { GetPokemonAction, UpdateDrawerPokelist } from '../definitions';
-import { PokemonListItem } from '../definitions';
+import { GetPokemonAction, PokemonData, UpdateDrawerPokelist } from '../definitions';
 import PokeAPI from "pokeapi-typescript";
 
 type UpdateAction = {
   type: 'UPDATE_SELECTED_POKEMON';
-  payload: PokemonListItem;
+  payload: PokemonData;
 };
 
 const formatSpeciesData = ({evolves_from_species, flavor_text_entries}: any) => ({
@@ -34,7 +33,7 @@ const getFullPokemonData = (pokeUrl: string): Promise<any> => fetch(pokeUrl)
 
 export const getPokemonEpic = (action$: ActionsObservable<GetPokemonAction>) => action$.pipe(
   ofType('GET_POKEMON'),
-  mergeMap(action => PokeAPI.Pokemon.list(360)),
+  mergeMap(action => PokeAPI.Pokemon.list(100)),
   mergeMap(data => Promise.all(data.results.map(poke => getFullPokemonData(poke.url).then(x => ({...x, ...poke}))))),
 
   map((data) => {
@@ -45,21 +44,14 @@ export const getSelectedPokemon = (action$: ActionsObservable<UpdateAction>) =>
   action$.pipe(
     ofType('UPDATE_SELECTED_POKEMON'),
     filter((action) => Boolean(action.payload)),
-    mergeMap(action => getFullPokemonData(action.payload.url)),
-    map((data) => {
-      return ({type: 'SET_SELECTED_POKEMON', payload: data });
+    map((action) => {
+      return ({type: 'SET_SELECTED_POKEMON', payload: action.payload });
     }));
 
 
 export const onSelectedPokeItem = (action$: ActionsObservable<UpdateDrawerPokelist>) => action$.pipe(
   ofType('UPDATE_DRAWER_POKELIST'),
-  mergeMap((action) => {
-    return action.payload.id ?
-      of(action.payload) :
-      getFullPokemonData(action.payload.url)
-  }),
-  mergeMap(pokemon => from([
-    { type: 'CACHE_POKEMON', payload: pokemon },
-    { type: 'SET_TO_MULTI_SELECT', payload: pokemon }
+  mergeMap(action => from([
+    { type: 'SET_TO_MULTI_SELECT', payload: action.payload }
     ]))
 );

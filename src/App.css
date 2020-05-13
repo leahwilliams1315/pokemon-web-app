@@ -61,6 +61,8 @@
   text-transform: capitalize;
 }
 
+/* TODO: Replace this with the right way to do it, Leah! */
+
 
 .MuiAppBar-colorPrimary {
   background-color: black;

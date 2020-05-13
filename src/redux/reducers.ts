@@ -23,10 +23,6 @@ export const selectedPokemonReducer = (state = selectedDefaultState, action: any
       const update = action.payload ? {[action.payload.name]: action.payload} : {};
       return {...state, ...update, single: action.payload?.name || null};
 
-    case 'CACHE_POKEMON':
-      const cache = action.payload ? {[action.payload.name]: action.payload} : {};
-      return {...state, ...cache};
-
     case 'SET_TO_MULTI_SELECT':
       return {...state, multiSelectedPokemon: state.multiSelectedPokemon.concat(action.payload)};
 

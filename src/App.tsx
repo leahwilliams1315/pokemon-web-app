@@ -49,10 +49,10 @@ const App: React.FC<AppProps> = (
       </AppBar>
       <div className="main">
       <Grid style={Boolean(multiSelected.length) ? {width: 'calc(100% - 275px)'} : {}} container spacing={4}>
-        {pokemonList.map(pokemon => <Grid key={pokemon.url} item xs={3}>
+        {pokemonList.map(pokemon => <Grid key={pokemon.id} item xs={3}>
           <PokemonCard
             onLearnMore={dispatchUpdateSelectedPokemon}
-            pokemon={selectedPokemon[pokemon.name] ? {...pokemon, ...selectedPokemon[pokemon.name]} : pokemon}
+            pokemon={pokemon}
             onAddToPokelist={(poke) => dispatchUpdateDrawerPokelist(poke)}
           />
         </Grid>)}

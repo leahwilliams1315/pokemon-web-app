@@ -1,10 +1,5 @@
 import { IPokemon, IPokemonSpecies } from "pokeapi-typescript";
 
-export type PokemonListItem = {
-  name: string;
-  url: string;
-}
-
 
 export type PokemonData = IPokemon & {
   species_data: {
@@ -14,4 +9,3 @@ export type PokemonData = IPokemon & {
 };
 
 
-export type CombinedPokemonType = PokemonData & PokemonListItem;

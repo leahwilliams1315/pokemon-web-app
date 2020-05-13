@@ -1,4 +1,4 @@
-import { CombinedPokemonType, PokemonData, PokemonListItem } from "./pokemon";
+import { PokemonData } from "./pokemon";
 
 type Action = {
   type: string;
@@ -9,7 +9,7 @@ type AC<A extends Action, P extends unknown[] = []> = (...arg: P) => A;
 
 export type UpdatePokemonAction = {
   type: 'UPDATE_POKEMON_LIST';
-  payload: PokemonListItem[];
+  payload: PokemonData[];
 }
 
 export type GetPokemonAction = {
@@ -18,34 +18,34 @@ export type GetPokemonAction = {
 
 export type UpdateSelectedPokemon = {
   type: 'UPDATE_SELECTED_POKEMON';
-  payload: CombinedPokemonType | null;
+  payload: PokemonData | null;
 }
 
-export type UpdatePokemonListAC = AC<UpdatePokemonAction, [PokemonListItem[]]>;
+export type UpdatePokemonListAC = AC<UpdatePokemonAction, [PokemonData[]]>;
 
 
 export type SetSelectedPokemon = {
   type: 'SET_SELECTED_POKEMON';
-  payload: CombinedPokemonType;
+  payload: PokemonData;
 }
 
-export type UpdateSelectedPokemonAC = AC<UpdateSelectedPokemon, [CombinedPokemonType | null]>;
+export type UpdateSelectedPokemonAC = AC<UpdateSelectedPokemon, [PokemonData | null]>;
 
-export type SetSelectedPokemonAC = AC<SetSelectedPokemon, [CombinedPokemonType | null]>;
+export type SetSelectedPokemonAC = AC<SetSelectedPokemon, [PokemonData | null]>;
 
 export type GetPokemonAC = AC<GetPokemonAction>;
 
 export type UpdateDrawerPokelist = {
   type: 'UPDATE_DRAWER_POKELIST';
-  payload: CombinedPokemonType;
+  payload: PokemonData;
 }
 
-export type UpdateDrawerPokelistAC = AC<UpdateDrawerPokelist, [CombinedPokemonType]>;
+export type UpdateDrawerPokelistAC = AC<UpdateDrawerPokelist, [PokemonData]>;
 
 
 export type RemovePokemonFromDrawerAC = () => ({
   type: 'REMOVE_POKEMON_FROM_DRAWER';
-  payload: PokemonListItem;
+  payload: PokemonData;
 })
 
 export type ClearPokemonDrawerAC = () => ({
@@ -59,7 +59,7 @@ export type AppProps = {
   dispatchUpdateDrawerPokelist: UpdateDrawerPokelistAC;
   dispatchRemovePokemonFromDrawer: RemovePokemonFromDrawerAC;
   dispatchClearPokemonDrawer: ClearPokemonDrawerAC;
-  pokemonList: PokemonListItem[];
+  pokemonList: PokemonData[];
   updatePokemonList?: UpdatePokemonListAC;
   singleSelectedPokemon: any; // todo, update this to the BIG pokemon data object type
   selectedPokemon: any;
@@ -68,14 +68,14 @@ export type AppProps = {
   dispatchOpenCompareDialog: any;
 }
 
-export type OnLearnMore = (pokemon: CombinedPokemonType) => any;
+export type OnLearnMore = (pokemon: PokemonData) => any;
 
-export type OnAddToPokelist = (pokemon: CombinedPokemonType) => any;
+export type OnAddToPokelist = (pokemon: PokemonData) => any;
 
-export type OnComparePokemon = (pokemon: CombinedPokemonType) => any;
+export type OnComparePokemon = (pokemon: PokemonData) => any;
 
 export type PokeCardProps = {
-  pokemon: PokemonData & PokemonListItem;
+  pokemon: PokemonData ;
   onLearnMore: OnLearnMore;
   onAddToPokelist: OnAddToPokelist;
 }
@@ -94,7 +94,7 @@ export type ComparePokemonDialogProps = {
   onComparePokemon?: OnComparePokemon
 }
 
-export type onRemovePokemon = (pokemon: PokemonListItem) => any;
+export type onRemovePokemon = (pokemon: PokemonData) => any;
 
 export type PokeDrawerItemProps = {
   pokemonData: any;
@@ -109,7 +109,7 @@ export type PokeDrawerItemProps = {
 
 export type openCompareDialog = {
   type: 'OPEN_COMPARE_POKEMON_DIALOG';
-  payload: CombinedPokemonType | null;
+  payload: PokemonData | null;
 }
 
 export type OpenCompareDialogAC = AC<openCompareDialog, boolean>;
