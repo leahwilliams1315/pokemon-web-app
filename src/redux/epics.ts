@@ -1,8 +1,21 @@
-import { map, mergeMap, filter } from 'rxjs/operators';
+import { map, mergeMap, filter, ignoreElements } from 'rxjs/operators';
 import { ofType, ActionsObservable } from 'redux-observable';
 import { of, from } from 'rxjs';
 import { GetPokemonAction, PokemonData, UpdateDrawerPokelist } from '../definitions';
 import PokeAPI from "pokeapi-typescript";
+
+const options = {
+  method: "post",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    query: `{
+      hello(name: "Butt")
+   }`
+  })
+};
+
 
 type UpdateAction = {
   type: 'UPDATE_SELECTED_POKEMON';
@@ -55,3 +68,11 @@ export const onSelectedPokeItem = (action$: ActionsObservable<UpdateDrawerPokeli
     { type: 'SET_TO_MULTI_SELECT', payload: action.payload }
     ]))
 );
+
+export const TEST_QUERY_GRAPHQL = (action$: ActionsObservable<GetPokemonAction>) => action$.pipe(
+  ofType('GET_POKEMON'),
+  mergeMap(() => fetch('http://localhost:4000/', options).then(res => res.json())),
+  map(x => {
+  }),
+  ignoreElements()
+)
